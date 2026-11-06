@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="es-MX"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jeeves Robotics · Presentación</title><link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300..700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;background:#05070A;overflow:hidden;font-family:Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+#vp{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center}
+#stage>section{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility 0s .5s}
+#stage>section.on{opacity:1;visibility:visible;transition:opacity .5s ease}
+section aside{display:none}
+h1{font-size:96px;font-weight:600;line-height:1.1}h2{font-size:64px;font-weight:600;line-height:1.15}h3{font-size:44px;font-weight:600;line-height:1.2}p{font-size:32px;line-height:1.4}
+hr{border:0;width:100%}img,video,svg{display:block}b{font-weight:600}
+#ui{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;padding:8px;border-radius:999px;background:rgba(18,24,37,.72);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);transition:opacity .3s;z-index:5}
+#ui button{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:999px;background:transparent;color:#F2F4F8;cursor:pointer}
+#ui button:hover{background:rgba(255,255,255,.1)}#ui svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#n{color:#F2F4F8;font:600 14px Inter,sans-serif;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+body.idle #ui{opacity:0}
+#notes{position:fixed;left:16px;right:16px;bottom:84px;max-height:38vh;overflow:auto;padding:18px 22px;border-radius:18px;background:rgba(11,15,23,.92);color:#F2F4F8;font:16px/1.5 Inter,sans-serif;white-space:pre-line;border:1px solid rgba(255,255,255,.12);display:none;z-index:6}
+body.shownotes #notes{display:block}
+#bar{position:fixed;left:0;top:0;height:3px;background:#45EDD1;z-index:6;transition:width .4s}
+</style></head><body>
+<div id="bar"></div>
+<div id="vp"><div id="stage">
+<section id="portada" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center">
+<video class="vid" poster="media/spin.png" src="media/spin.mp4" muted loop playsinline preload="auto" aria-label="Jeeves en 3D girando 360 grados" style="position:absolute;left:1040px;top:0px;width:880px;height:1080px;object-fit:cover"></video>
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;69,237,209&#x27;,LA=0.05,PA=0.8,N=16,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="width:880px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#45EDD1">Robot autónomo de entregas</p>
+<h1 style="font-family:'Inter Tight', Arial, sans-serif;font-size:160px;font-weight:700;line-height:0.95;letter-spacing:-5px;color:#F2F5F4">JEEVES<br>ROBOTICS</h1>
+<div style="width:120px;height:4px;background:#45EDD1"></div>
+<p style="font-size:44px;line-height:1.3;color:#C9D2D4">Tu destino. Nuestra misión.</p>
+</div>
+<aside>[PITCH · Integrante 1 · aprox. 60 s — esto se dice, no se pone en pantalla]
+¿Cuántas veces al día alguien en un restaurante, una oficina o una escuela deja lo que está haciendo solo para llevar algo de un lugar a otro? Nosotros lo convertimos en una oportunidad.
+Somos Jeeves Robotics y les presentamos a Jeeves: un robot autónomo de entregas. Tú eliges el destino desde tu celular y él hace el recorrido solo, sin pausas, para que tu equipo se dedique a lo que de verdad importa: tus clientes.
+Nuestro lema lo resume: “Tu destino. Nuestra misión.”</aside>
+</section>
+
+<section id="problema" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">El problema</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">Llevar cosas de un punto a otro<br>roba tiempo.</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:32px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 35%, #BFE9FF 65%, #45EDD1 100%);box-shadow:0 30px 60px rgba(15,23,42,0.12)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:18px 18px 32px;border-radius:30px;background:linear-gradient(160deg, rgba(255,255,255,0.96), rgba(236,246,244,0.92))">
+<video class="vid" poster="media/plan0.jpg" src="media/plan0.mp4" muted loop playsinline preload="auto" aria-label="Diorama: Jeeves recorriendo restaurantes" style="width:100%;height:300px;object-fit:cover;border-radius:20px;border:1px solid rgba(255,255,255,0.8)"></video>
+<div style="display:flex;flex-direction:column;gap:8px;padding:0 14px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Restaurantes</h3>
+<p style="font-size:32px;line-height:1.4;color:#56616A">De la cocina a la mesa.</p>
+</div>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:32px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 35%, #BFE9FF 65%, #45EDD1 100%);box-shadow:0 30px 60px rgba(15,23,42,0.12)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:18px 18px 32px;border-radius:30px;background:linear-gradient(160deg, rgba(255,255,255,0.96), rgba(236,246,244,0.92))">
+<video class="vid" poster="media/plan1.jpg" src="media/plan1.mp4" muted loop playsinline preload="auto" aria-label="Diorama: Jeeves recorriendo oficinas" style="width:100%;height:300px;object-fit:cover;border-radius:20px;border:1px solid rgba(255,255,255,0.8)"></video>
+<div style="display:flex;flex-direction:column;gap:8px;padding:0 14px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Oficinas</h3>
+<p style="font-size:32px;line-height:1.4;color:#56616A">Documentos entre áreas.</p>
+</div>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:32px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 35%, #BFE9FF 65%, #45EDD1 100%);box-shadow:0 30px 60px rgba(15,23,42,0.12)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:18px 18px 32px;border-radius:30px;background:linear-gradient(160deg, rgba(255,255,255,0.96), rgba(236,246,244,0.92))">
+<video class="vid" poster="media/plan2.jpg" src="media/plan2.mp4" muted loop playsinline preload="auto" aria-label="Diorama: Jeeves recorriendo escuelas" style="width:100%;height:300px;object-fit:cover;border-radius:20px;border:1px solid rgba(255,255,255,0.8)"></video>
+<div style="display:flex;flex-direction:column;gap:8px;padding:0 14px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Escuelas</h3>
+<p style="font-size:32px;line-height:1.4;color:#56616A">Material entre salones.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">02 / 20</p></div>
+<aside>[DESCRIPCIÓN DEL PRODUCTO · aprox. 45 s · Los circuitos se mueven solos]
+Piensen en un restaurante en hora pico: los meseros van y vienen de la cocina a la mesa todo el día.
+En una oficina, alguien deja lo que está haciendo para llevar documentos a otra área. En una escuela, se mandan materiales de un salón a otro.
+Aquí ven a Jeeves haciendo justo eso en cada lugar: sale de su base, llega a su destino y regresa.</aside>
+</section>
+
+<section id="solucion" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:row;gap:96px">
+<div style="position:absolute;left:1180px;top:40px;width:640px;height:900px;background:radial-gradient(circle at 50% 55%, rgba(69,237,209,0.16), rgba(69,237,209,0) 62%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">La solución</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#F2F5F4">Jeeves hace<br>las entregas solo.</h2>
+</div>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:32px;padding:28px 0;border-top:1px solid #262D32">
+<p style="width:300px;font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#45EDD1">1.20 m</p>
+<p style="font-size:32px;color:#C9D2D4">de altura</p>
+</div>
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:32px;padding:28px 0;border-top:1px solid #262D32">
+<p style="width:300px;font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#45EDD1">Arriba</p>
+<p style="font-size:32px;color:#C9D2D4">charola de carga ligera</p>
+</div>
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:32px;padding:28px 0;border-top:1px solid #262D32;border-bottom:1px solid #262D32">
+<p style="width:300px;font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#45EDD1">Abajo</p>
+<p style="font-size:32px;color:#C9D2D4">charola de carga pesada</p>
+</div>
+</div>
+</div>
+<video class="vid" poster="media/close.png" src="media/close.mp4" muted loop playsinline preload="auto" aria-label="Modelo 3D de Jeeves en alta definición, girando y cambiando de expresión" style="width:640px;height:792px;object-fit:cover"></video>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#7D898E">Jeeves Robotics</p><p style="font-size:24px;color:#7D898E;font-variant-numeric:tabular-nums">03 / 20</p></div>
+<aside>[aprox. 45 s · El modelo 3D gira y cambia de expresión]
+Nuestra respuesta es Jeeves. Mide 1.20 metros, una altura cómoda para dejar y recoger cosas.
+Tiene doble charola: la de abajo para carga pesada y la de arriba para cosas ligeras.
+Y lo más importante: hace las entregas solo. Se le indica el destino y él se encarga del recorrido.</aside>
+</section>
+
+<section id="funciona" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;10,125,108&#x27;,LA=0.06,PA=0.55,N=14,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">Cómo funciona</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">Así llega a su destino.</h2>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:32px;background:rgba(252,253,252,0.86);border:1px solid #E1E6E4;border-radius:28px;padding:48px;backdrop-filter:blur(8px);box-shadow:0 20px 50px rgba(15,23,42,0.08)">
+<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center">
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de línea guía" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 42V30a8 8 0 0 1 8-8h12a8 8 0 0 0 8-8V7"/><path d="M33 12l5-5 5 5"/></svg></div>
+<p style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:300;color:#7F8B92">01</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Sigue la línea</h3>
+<p style="font-size:32px;line-height:1.4;color:#56616A">Una línea guía en el piso.</p>
+</div>
+</div>
+<svg width="72" height="20" viewBox="0 0 72 20" style="flex:none" aria-hidden="true"><path d="M2 10H68" stroke="#9AA5AB" stroke-width="3" stroke-linecap="round"/><path d="M58 3l10 7-10 7" fill="none" stroke="#9AA5AB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:32px;background:rgba(252,253,252,0.86);border:1px solid #E1E6E4;border-radius:28px;padding:48px;backdrop-filter:blur(8px);box-shadow:0 20px 50px rgba(15,23,42,0.08)">
+<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center">
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de código QR" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="13" height="13" rx="2"/><rect x="28" y="7" width="13" height="13" rx="2"/><rect x="7" y="28" width="13" height="13" rx="2"/><path d="M28 28h5v5h-5z"/><path d="M38 28h3"/><path d="M28 39h3"/><path d="M36 36h5v5"/></svg></div>
+<p style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:300;color:#7F8B92">02</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Se ubica</h3>
+<p style="font-size:32px;line-height:1.4;color:#56616A">Si la pierde, lee un código QR.</p>
+</div>
+</div>
+<svg width="72" height="20" viewBox="0 0 72 20" style="flex:none" aria-hidden="true"><path d="M2 10H68" stroke="#9AA5AB" stroke-width="3" stroke-linecap="round"/><path d="M58 3l10 7-10 7" fill="none" stroke="#9AA5AB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:32px;background:rgba(252,253,252,0.86);border:1px solid #E1E6E4;border-radius:28px;padding:48px;backdrop-filter:blur(8px);box-shadow:0 20px 50px rgba(15,23,42,0.08)">
+<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center">
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de alto" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6h14l11 11v14L31 42H17L6 31V17z"/><path d="M16 24h16"/></svg></div>
+<p style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:300;color:#7F8B92">03</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Se detiene</h3>
+<p style="font-size:32px;line-height:1.4;color:#56616A">Ante personas u obstáculos.</p>
+</div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">04 / 20</p></div>
+<aside>[aprox. 60 s]
+Jeeves funciona con tres reglas simples.
+Uno: sigue una línea guía en el piso; esa línea es su camino.
+Dos: si por algo pierde la línea, se ubica leyendo códigos QR colocados en la ruta.
+Tres: su cámara y sus sensores detectan personas u obstáculos, y se detiene para evitar choques.
+Es un sistema sencillo, fácil de instalar y pensado para ser seguro alrededor de la gente.</aside>
+</section>
+
+<section id="personalidad" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:0px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:128px;top:350px;width:1664px;height:300px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+var S=[&#x27;dormitando&#x27;,&#x27;alerta&#x27;,&#x27;sorprendido&#x27;,&#x27;feliz&#x27;,&#x27;bloqueado&#x27;],C=[&#x27;#2f9e5f&#x27;,&#x27;#2f86e8&#x27;,&#x27;#e8962a&#x27;,&#x27;#3ecf6a&#x27;,&#x27;#e5533d&#x27;],OFF=[0,1.3,2.1,.6,3.2];
+function rr(X,Y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+w,Y,X+w,Y+h,r);x.arcTo(X+w,Y+h,X,Y+h,r);x.arcTo(X,Y+h,X,Y,r);x.arcTo(X,Y,X+w,Y,r);x.closePath()}
+function eyes(s,col,t,blink){x.fillStyle=x.strokeStyle=col;x.shadowColor=col;x.shadowBlur=26;x.lineCap=&#x27;round&#x27;;x.lineJoin=&#x27;round&#x27;;x.globalAlpha=1;
+[187,327].forEach(function(X){
+if(s===&#x27;dormitando&#x27;){var h=24+10*Math.sin(t*1.4),dy=4*Math.sin(t*.7);rr(X-64,128+dy-h/2,128,h,h/2);x.fill()}
+else if(s===&#x27;alerta&#x27;){var dx=18*Math.sin(t*1.3),h2=125*(1-blink*.9);rr(X+dx-50,120-h2/2,100,h2,Math.min(45,h2/2));x.fill()}
+else if(s===&#x27;sorprendido&#x27;){var k=1+.07*Math.sin(t*7),w=115*k,h3=Math.max(8,160*k*(1-blink*.9));x.lineWidth=13;rr(X-w/2,131-h3/2,w,h3,Math.min(w/2,h3/2));x.stroke()}
+else if(s===&#x27;feliz&#x27;){var dy2=-10*Math.abs(Math.sin(t*3));x.lineWidth=20;x.beginPath();x.arc(X,150+dy2,46,Math.PI,2*Math.PI);x.stroke()}
+else{var dx2=Math.sin(t*2)&gt;0?5*Math.sin(t*34):0;x.globalAlpha=Math.sin(t*5)&gt;0?1:.35;x.lineWidth=20;x.beginPath();x.moveTo(X+dx2-50,76);x.lineTo(X+dx2+50,180);x.moveTo(X+dx2+50,76);x.lineTo(X+dx2-50,180);x.stroke()}});
+x.globalAlpha=1;x.shadowBlur=0}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.setTransform(D,0,0,D,0,0);x.clearRect(0,0,W,H);
+var n=5,sw=Math.min(300,W/5.4),sh=sw*.64,gap=(W-n*sw)/(n-1),y0=(H-sh)/2;
+for(var i=0;i&lt;n;i++){var X0=i*(sw+gap),tt=t+OFF[i],ph=tt%4.2,bl=ph&gt;4?Math.sin((ph-4)/.2*Math.PI):0;
+x.setTransform(D,0,0,D,0,0);x.shadowColor=C[i];x.shadowBlur=40;x.fillStyle=&#x27;#05070b&#x27;;rr(X0+6,y0+6,sw-12,sh-12,sw*.11);x.fill();x.shadowBlur=0;
+x.strokeStyle=&#x27;rgba(255,255,255,.10)&#x27;;x.lineWidth=2;rr(X0+6,y0+6,sw-12,sh-12,sw*.11);x.stroke();
+var k=(sw-40)/512;x.setTransform(D*k,0,0,D*k,D*(X0+20),D*(y0+(sh-256*k)/2));eyes(S[i],C[i],tt,bl)}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">Su personalidad</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#F2F5F4">Una cara que comunica.</h2>
+</div>
+<div style="height:88px"></div>
+<div style="height:300px"></div>
+<div style="height:28px"></div>
+<div style="display:flex;flex-direction:row;justify-content:space-between">
+<div style="width:300px;display:flex;flex-direction:column;align-items:center;gap:8px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:12px"><div style="width:14px;height:14px;border-radius:50%;background:#2f9e5f;box-shadow:0 0 12px #2f9e5f"></div><p style="font-size:32px;font-weight:600;color:#F2F5F4">Dormitando</p></div>
+<p style="font-size:24px;line-height:1.35;color:#A3AEB1;text-align:center">Espera la próxima orden</p>
+</div>
+<div style="width:300px;display:flex;flex-direction:column;align-items:center;gap:8px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:12px"><div style="width:14px;height:14px;border-radius:50%;background:#2f86e8;box-shadow:0 0 12px #2f86e8"></div><p style="font-size:32px;font-weight:600;color:#F2F5F4">Alerta</p></div>
+<p style="font-size:24px;line-height:1.35;color:#A3AEB1;text-align:center">Va en camino</p>
+</div>
+<div style="width:300px;display:flex;flex-direction:column;align-items:center;gap:8px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:12px"><div style="width:14px;height:14px;border-radius:50%;background:#e8962a;box-shadow:0 0 12px #e8962a"></div><p style="font-size:32px;font-weight:600;color:#F2F5F4">Sorprendido</p></div>
+<p style="font-size:24px;line-height:1.35;color:#A3AEB1;text-align:center">Detectó un obstáculo</p>
+</div>
+<div style="width:300px;display:flex;flex-direction:column;align-items:center;gap:8px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:12px"><div style="width:14px;height:14px;border-radius:50%;background:#3ecf6a;box-shadow:0 0 12px #3ecf6a"></div><p style="font-size:32px;font-weight:600;color:#F2F5F4">Feliz</p></div>
+<p style="font-size:24px;line-height:1.35;color:#A3AEB1;text-align:center">Entrega completada</p>
+</div>
+<div style="width:300px;display:flex;flex-direction:column;align-items:center;gap:8px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:12px"><div style="width:14px;height:14px;border-radius:50%;background:#e5533d;box-shadow:0 0 12px #e5533d"></div><p style="font-size:32px;font-weight:600;color:#F2F5F4">Bloqueado</p></div>
+<p style="font-size:24px;line-height:1.35;color:#A3AEB1;text-align:center">Detenido, avisa con luces</p>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#7D898E">Jeeves Robotics</p><p style="font-size:24px;color:#7D898E;font-variant-numeric:tabular-nums">05 / 20</p></div>
+<aside>[aprox. 50 s · Las caras se mueven en vivo · Si el prototipo está encendido, muéstrenlo]
+Queríamos que Jeeves no se sintiera como una máquina fría. Su pantalla muestra ojos animados que cambian de estado y de color:
+Dormitando, en verde, mientras espera la próxima orden. Alerta, en azul, cuando va en camino. Sorprendido, en naranja, cuando detecta un obstáculo. Feliz, en verde claro, cuando completa una entrega. Y Bloqueado, en rojo, cuando está detenido y avisa con sus luces.
+Así las personas a su alrededor entienden qué está haciendo sin leer nada.</aside>
+</section>
+
+<section id="app" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:start">
+<div style="position:absolute;left:1330px;top:96px;width:420px;height:856px;display:flex;flex-direction:column;padding:14px;background:#0B0F17;border-radius:64px;box-shadow:0 40px 80px rgba(15,23,42,0.28), inset 0 0 0 2px #2A3237">
+<video class="vid" poster="media/app.jpg" src="media/app.mp4" muted loop playsinline preload="auto" aria-label="La app de Jeeves funcionando: envía al robot, muestra la ruta, las entregas y la batería" style="width:392px;height:828px;object-fit:cover;border-radius:50px"></video>
+</div>
+<div style="width:1100px;display:flex;flex-direction:column;gap:72px">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">La app</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">Todo se controla<br>desde la app.</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:32px">
+<div style="width:80px;height:80px;border-radius:22px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de destino" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 43s-13-12-13-22a13 13 0 0 1 26 0c0 10-13 22-13 22z"/><circle cx="24" cy="21" r="5"/></svg></div>
+<p style="font-size:32px;color:#111518">Destino: <b>Punto A, B o C</b></p>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:32px">
+<div style="width:80px;height:80px;border-radius:22px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de batería" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="15" width="34" height="18" rx="4"/><path d="M43 21v6"/><path d="M23 18l-4 6h6l-4 6"/></svg></div>
+<p style="font-size:32px;color:#111518">Batería y mapa de la ruta</p>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:32px">
+<div style="width:80px;height:80px;border-radius:22px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de historial" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M24 15v9l6 4"/></svg></div>
+<p style="font-size:32px;color:#111518">Historial de entregas</p>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:32px">
+<div style="width:80px;height:80px;border-radius:22px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de base" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 23L24 9l17 14"/><path d="M12 19v20h24V19"/><path d="M20 39V29h8v10"/></svg></div>
+<p style="font-size:32px;color:#111518">Detener o volver a la base</p>
+</div>
+</div>
+<p style="align-self:start;font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#0A7D6C;background:#E3F7F3;padding:10px 22px;border-radius:999px">● En vivo · modo demostración</p>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">06 / 20</p></div>
+<aside>[aprox. 50 s · El celular muestra la app real funcionando]
+Jeeves se controla desde una app en el teléfono.
+Ahí eliges el destino: Punto A, B o C. También ves la batería, el mapa de la ruta y el historial de entregas.
+Y si hace falta, puedes detenerlo o mandarlo de regreso a la base con un solo toque.</aside>
+</section>
+
+<section id="componentes" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;69,237,209&#x27;,LA=0.05,PA=0.85,N=16,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">Componentes</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#F2F5F4">Lo que lleva dentro.</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:140px;padding:40px;border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.28), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg, rgba(69,237,209,0.22), rgba(69,237,209,0.04));border:1px solid rgba(69,237,209,0.35);display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de cámara" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="36" height="25" rx="4"/><circle cx="24" cy="26" r="7"/><path d="M17 14l3-5h8l3 5"/></svg></div>
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#F2F5F4">Cámara</h3>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:140px;padding:40px;border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.28), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg, rgba(69,237,209,0.22), rgba(69,237,209,0.04));border:1px solid rgba(69,237,209,0.35);display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de sensores" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="24" r="3"/><path d="M19 16a11 11 0 0 1 0 16"/><path d="M26 10a19 19 0 0 1 0 28"/><path d="M33 5a26 26 0 0 1 0 38"/></svg></div>
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#F2F5F4">Sensores</h3>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:140px;padding:40px;border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.28), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg, rgba(69,237,209,0.22), rgba(69,237,209,0.04));border:1px solid rgba(69,237,209,0.35);display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de batería" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="15" width="34" height="18" rx="4"/><path d="M43 21v6"/><path d="M23 18l-4 6h6l-4 6"/></svg></div>
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#F2F5F4">Batería recargable</h3>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:140px;padding:40px;border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.28), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg, rgba(69,237,209,0.22), rgba(69,237,209,0.04));border:1px solid rgba(69,237,209,0.35);display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de pantalla" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="38" height="27" rx="4"/><path d="M18 42h12"/><path d="M24 35v7"/><path d="M18 19v5"/><path d="M30 19v5"/></svg></div>
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#F2F5F4">Pantalla</h3>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:140px;padding:40px;border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.28), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg, rgba(69,237,209,0.22), rgba(69,237,209,0.04));border:1px solid rgba(69,237,209,0.35);display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de luces" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="7"/><path d="M24 5v5"/><path d="M24 38v5"/><path d="M5 24h5"/><path d="M38 24h5"/><path d="M10.5 10.5l3.5 3.5"/><path d="M34 34l3.5 3.5"/><path d="M10.5 37.5l3.5-3.5"/><path d="M34 14l3.5-3.5"/></svg></div>
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#F2F5F4">Luces de estado</h3>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#7D898E">Jeeves Robotics</p><p style="font-size:24px;color:#7D898E;font-variant-numeric:tabular-nums">07 / 20</p></div>
+<aside>[aprox. 45 s]
+Por dentro, Jeeves combina cinco componentes: una cámara y sensores que detectan objetos y personas, una batería recargable, la pantalla donde viven sus ojos y luces de estado que avisan cómo se encuentra.
+Todo trabaja junto para que el robot se mueva solo y de forma segura.</aside>
+</section>
+
+<section id="precios" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;10,125,108&#x27;,LA=0.06,PA=0.5,N=14,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">Catálogo</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">Catálogo y precios.</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:40px;border-radius:30px;background:linear-gradient(150deg, #6FF5DF, #45EDD1 55%, #2FD9BE);border:1px solid rgba(255,255,255,0.7);box-shadow:inset 0 1px 0 rgba(255,255,255,0.8), 0 30px 70px rgba(69,237,209,0.45)">
+<div style="min-height:84px;display:flex;flex-direction:column"><h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#0E1114">Jeeves Robot</h3></div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#0E1114">$6,999</p>
+<p style="font-size:24px;color:#1C4A43">MXN</p>
+</div>
+<hr style="border-top:1px solid #2E8B7C">
+<p style="font-size:24px;line-height:1.5;color:#0E1114">Robot autónomo de doble charola.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:30px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 38%, #BFE9FF 68%, #45EDD1 100%);box-shadow:0 24px 60px rgba(15,23,42,0.10)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:40px;border-radius:28px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.66));backdrop-filter:blur(14px)">
+<div style="min-height:84px;display:flex;flex-direction:column"><h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#111518">Paquete Ruta</h3></div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">$995</p>
+<p style="font-size:24px;color:#56616A">MXN</p>
+</div>
+<hr style="border-top:1px solid #D5E3E0">
+<p style="font-size:24px;line-height:1.5;color:#3B4457">Diseño de ruta, línea guía con 3 destinos, QR y calibración.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:30px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 38%, #BFE9FF 68%, #45EDD1 100%);box-shadow:0 24px 60px rgba(15,23,42,0.10)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:40px;border-radius:28px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.66));backdrop-filter:blur(14px)">
+<div style="min-height:84px;display:flex;flex-direction:column"><h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#111518">Kit de rutas extra</h3></div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">$259</p>
+<p style="font-size:24px;color:#56616A">MXN</p>
+</div>
+<hr style="border-top:1px solid #D5E3E0">
+<p style="font-size:24px;line-height:1.5;color:#3B4457">Para sumar más rutas.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:30px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 38%, #BFE9FF 68%, #45EDD1 100%);box-shadow:0 24px 60px rgba(15,23,42,0.10)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:40px;border-radius:28px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.66));backdrop-filter:blur(14px)">
+<div style="min-height:84px;display:flex;flex-direction:column"><h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#111518">Soporte anual</h3></div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">$995</p>
+<p style="font-size:24px;color:#56616A">MXN al año</p>
+</div>
+<hr style="border-top:1px solid #D5E3E0">
+<p style="font-size:24px;line-height:1.5;color:#3B4457">Soporte técnico durante un año.</p>
+</div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">08 / 20</p></div>
+<aside>[aprox. 50 s]
+Así se ve nuestro catálogo.
+El robot Jeeves cuesta 6,999 pesos.
+Para que funcione en tu espacio está el Paquete Ruta, de 995 pesos: diseñamos la ruta, instalamos la línea guía con 3 destinos, colocamos los códigos QR y lo calibramos.
+Si necesitas más rutas, el kit extra cuesta 259 pesos. Y el soporte anual cuesta 995 pesos al año.</aside>
+</section>
+
+<section id="comprar" data-transition="fade" style="background:#45EDD1;color:#0E1114;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;255,255,255&#x27;,LA=0.18,PA=0.9,N=12,PER=2;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:128px;top:420px;width:1664px;height:140px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+function rs(){D=Math.min(2,devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D}rs();addEventListener(&#x27;resize&#x27;,rs);
+var IC=[[&#x27;M12 6h18l8 8v28H12z&#x27;,&#x27;M30 6v8h8&#x27;,&#x27;M18 24h12&#x27;,&#x27;M18 31h12&#x27;],[&#x27;M24 43s-13-12-13-22a13 13 0 0 1 26 0c0 10-13 22-13 22z&#x27;,&#x27;M29 21a5 5 0 1 1-10 0a5 5 0 1 1 10 0&#x27;],[&#x27;M31 7a9 9 0 0 0-11 11L8 30a4 4 0 0 0 6 6l12-12A9 9 0 0 0 37 13l-6 6-5-1-1-5z&#x27;]].map(function(a){return a.map(function(d){return new Path2D(d)})});
+function rr(X,Y,w,h,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+w,Y,X+w,Y+h,r);x.arcTo(X+w,Y+h,X,Y+h,r);x.arcTo(X,Y+h,X,Y,r);x.arcTo(X,Y,X+w,Y,r);x.closePath()}
+function ease(t){return t&lt;.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+var t0=performance.now(),CY=0.5;
+function fr(now){var t=((now-t0)/1000)%8;x.setTransform(D,0,0,D,0,0);x.clearRect(0,0,W,H);
+var colW=(W-80)/3,cx=[44,colW+40+44,2*(colW+40)+44],cy=H*CY;
+// progress: 0-.6 hold at 1, .6-2 to node2, 2-2.6 hold, 2.6-4 to node3, 4-6.5 hold, 6.5-8 fade
+var pos,fade=1;
+if(t&lt;.6)pos=cx[0];else if(t&lt;2)pos=cx[0]+(cx[1]-cx[0])*ease((t-.6)/1.4);else if(t&lt;2.6)pos=cx[1];else if(t&lt;4)pos=cx[1]+(cx[2]-cx[1])*ease((t-2.6)/1.4);else pos=cx[2];
+if(t&gt;6.5)fade=1-(t-6.5)/1.5;
+x.lineCap=&#x27;round&#x27;;x.strokeStyle=&#x27;rgba(14,17,20,0.18)&#x27;;x.lineWidth=8;x.beginPath();x.moveTo(cx[0],cy);x.lineTo(cx[2],cy);x.stroke();
+x.globalAlpha=fade;x.strokeStyle=&#x27;#0E1114&#x27;;x.beginPath();x.moveTo(cx[0],cy);x.lineTo(pos,cy);x.stroke();
+x.beginPath();x.arc(pos,cy,9,0,6.283);x.fillStyle=&#x27;#ffffff&#x27;;x.shadowColor=&#x27;#ffffff&#x27;;x.shadowBlur=22;x.fill();x.shadowBlur=0;x.globalAlpha=1;
+for(var i=0;i&lt;3;i++){var on=fade&gt;0.05&amp;&amp;pos&gt;=cx[i]-1,X=cx[i]-44,Y=cy-44;
+if(on){var k=Math.min(1,(pos-cx[i])/60+.6);x.globalAlpha=fade;x.strokeStyle=&#x27;rgba(14,17,20,0.35)&#x27;;x.lineWidth=3;rr(X-10,Y-10,108,108,30);x.stroke();x.globalAlpha=1}
+rr(X,Y,88,88,24);if(on){x.fillStyle=&#x27;#0E1114&#x27;;x.shadowColor=&#x27;rgba(14,17,20,.45)&#x27;;x.shadowBlur=24;x.fill();x.shadowBlur=0}else{x.fillStyle=&#x27;rgba(255,255,255,0.35)&#x27;;x.fill();x.strokeStyle=&#x27;rgba(14,17,20,0.35)&#x27;;x.lineWidth=2;x.stroke()}
+x.save();x.translate(X+20,Y+20);x.scale(1,1);x.strokeStyle=on?&#x27;#45EDD1&#x27;:&#x27;rgba(14,17,20,0.45)&#x27;;x.lineWidth=2.5;x.lineJoin=x.lineCap=&#x27;round&#x27;;IC[i].forEach(function(p){x.stroke(p)});x.restore()}
+requestAnimationFrame(fr)}requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="position:absolute;left:128px;top:580px;width:528px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1C4A43">Paso 1</p>
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#0E1114">Cotización</h3>
+</div>
+<div style="position:absolute;left:696px;top:580px;width:528px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1C4A43">Paso 2</p>
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#0E1114">Visita al local</h3>
+</div>
+<div style="position:absolute;left:1264px;top:580px;width:528px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1C4A43">Paso 3</p>
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#0E1114">Instalación y capacitación</h3>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1C4A43">Cómo comprar</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#0E1114">Tres pasos para tenerlo.</h2>
+</div>
+<div style="align-self:start;display:flex;flex-direction:row;align-items:center;gap:24px;background:#0E1114;border-radius:24px;padding:28px 40px;box-shadow:0 24px 50px rgba(14,17,20,0.25)">
+<svg aria-label="Ícono de pago" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="13" width="38" height="23" rx="4"/><circle cx="24" cy="24.5" r="5"/><path d="M11 19v11"/><path d="M37 19v11"/></svg>
+<p style="font-size:32px;color:#F2F5F4">Pago por transferencia o en efectivo, con anticipo.</p>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#1C4A43">Jeeves Robotics</p><p style="font-size:24px;color:#1C4A43;font-variant-numeric:tabular-nums">09 / 20</p></div>
+<aside>[aprox. 40 s · La barra se llena paso a paso sola]
+Comprar a Jeeves es sencillo.
+Primero nos pides una cotización. Después visitamos el local, medimos el espacio y diseñamos la ruta. Por último, instalamos el robot y capacitamos al personal para usarlo.
+El pago puede ser por transferencia o en efectivo, con un anticipo para apartar tu Jeeves.</aside>
+</section>
+
+<section id="mercado" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:row;gap:96px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;10,125,108&#x27;,LA=0.06,PA=0.5,N=14,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">Segmento de mercado</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">Para quien mueve<br>cosas todo el día.</h2>
+</div>
+<p style="font-size:32px;line-height:1.45;color:#3B4457;width:640px">Negocios que buscan <b>automatizar sus entregas internas</b> con un precio accesible.</p>
+</div>
+<div style="width:880px;display:flex;flex-direction:column;justify-content:center;padding:16px 48px;border-radius:32px;background:linear-gradient(150deg, rgba(255,255,255,0.78), rgba(236,246,244,0.55));border:1px solid rgba(255,255,255,0.9);box-shadow:inset 0 1px 0 #FFFFFF, 0 24px 60px rgba(15,23,42,0.10);backdrop-filter:blur(14px)">
+<div style="display:flex;flex-direction:row;align-items:center;gap:40px;padding:32px 0;border-top:1px solid #DCE2E0">
+<p style="width:90px;font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:300;color:#7F8B92">01</p>
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de restaurante" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34h36"/><path d="M10 34a14 14 0 0 1 28 0"/><path d="M24 20v-4"/><path d="M20 16h8"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Restaurantes y cafeterías</h3>
+<p style="font-size:32px;color:#56616A">Con servicio a mesa.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:40px;padding:32px 0;border-top:1px solid #DCE2E0">
+<p style="width:90px;font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:300;color:#7F8B92">02</p>
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de oficina" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="15" width="34" height="24" rx="4"/><path d="M18 15v-4h12v4"/><path d="M7 25h34"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Oficinas y empresas</h3>
+<p style="font-size:32px;color:#56616A">Con varias áreas o pisos.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:40px;padding:32px 0;border-top:1px solid #DCE2E0">
+<p style="width:90px;font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:300;color:#7F8B92">03</p>
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de escuela" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l20-9 20 9-20 9z"/><path d="M12 23v9c0 3 5 6 12 6s12-3 12-6v-9"/><path d="M44 19v10"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Escuelas e instituciones</h3>
+<p style="font-size:32px;color:#56616A">Con salones y dirección.</p>
+</div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">10 / 20</p></div>
+<aside>[SEGMENTO DE MERCADO · aprox. 50 s]
+Nuestro mercado son los negocios e instituciones donde todo el día se mueven cosas de un punto a otro.
+Primero, restaurantes y cafeterías con servicio a mesa. Segundo, oficinas y empresas con varias áreas o pisos. Tercero, escuelas e instituciones educativas con salones y dirección.
+Lo que tienen en común: quieren automatizar sus entregas internas, pero necesitan una opción accesible. Por eso Jeeves empieza en 6,999 pesos.
+[Si su profe pide zona geográfica, agreguen aquí la ciudad o región donde lo venderían.]</aside>
+</section>
+
+<section id="marca" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:row;align-items:center;gap:96px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;69,237,209&#x27;,LA=0.05,PA=0.8,N=16,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="position:absolute;left:128px;top:220px;width:640px;height:640px;background:radial-gradient(circle at 50% 50%, rgba(37,99,235,0.35), rgba(37,99,235,0) 65%)"></div>
+<div style="width:640px;display:flex;align-items:center;justify-content:center"><svg aria-label="Logo de Jeeves Robotics: cabeza de robot con ojos sonrientes" width="440" height="440" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="#0F172A"/><g transform="translate(10 17)"><rect x="2" y="3" width="40" height="25" rx="11" fill="#0F172A" stroke="#ffffff" stroke-width="2.5"/><path d="M2 14C2 6 8 1 14 1h16c6 0 12 5 12 13" fill="none" stroke="#2563EB" stroke-width="3"/><path d="M11 20q4-7 8 0M25 20q4-7 8 0" fill="none" stroke="#4d8bff" stroke-width="3" stroke-linecap="round"/></g></svg></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:48px;padding:56px;border-radius:32px;background:linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.26), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">Branding · Nombre y logo</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#F2F5F4">Jeeves Robotics.</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;padding-top:32px;border-top:1px solid #262D32">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#A3AEB1">El nombre</p>
+<p style="font-size:32px;line-height:1.45;color:#F2F5F4">Jeeves es el nombre clásico de un mayordomo: servicial, discreto y confiable.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;padding-top:32px;border-top:1px solid #262D32">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#A3AEB1">El logo</p>
+<p style="font-size:32px;line-height:1.45;color:#F2F5F4">La cabeza de Jeeves con ojos sonrientes: tecnología con cara amable.</p>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#7D898E">Jeeves Robotics</p><p style="font-size:24px;color:#7D898E;font-variant-numeric:tabular-nums">11 / 20</p></div>
+<aside>[BRANDING · Nombre y logo · aprox. 45 s]
+Elegimos el nombre Jeeves porque es el nombre clásico de un mayordomo: alguien servicial, discreto y en quien puedes confiar. Eso es lo que hace nuestro robot: atiende sin estorbar.
+El logo es la cabeza de Jeeves con sus ojos sonrientes. Queríamos que la marca se viera tecnológica, pero con una cara amable.
+[Si su logo final es otro, cámbienlo aquí con Agregar imagen.]</aside>
+</section>
+
+<section id="sentir" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;10,125,108&#x27;,LA=0.06,PA=0.5,N=14,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">Branding · Cómo te hacemos sentir</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">Confianza con cara amable.</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:30px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 38%, #BFE9FF 68%, #45EDD1 100%);box-shadow:0 24px 60px rgba(15,23,42,0.10)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:40px;border-radius:28px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.66));backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de escudo" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5l15 6v11c0 10-7 17-15 21C16 39 9 32 9 22V11z"/><path d="M17 24l5 5 9-10"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Confianza</h3>
+<p style="font-size:26px;line-height:1.45;color:#56616A">Entrega a tiempo y se detiene ante cualquier obstáculo.</p>
+</div>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:30px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 38%, #BFE9FF 68%, #45EDD1 100%);box-shadow:0 24px 60px rgba(15,23,42,0.10)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:40px;border-radius:28px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.66));backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de hoja" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 38C10 20 22 10 40 8c-1 18-11 30-28 30z"/><path d="M10 38l14-14"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Tranquilidad</h3>
+<p style="font-size:26px;line-height:1.45;color:#56616A">Tu equipo deja de correr y se enfoca en atender.</p>
+</div>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:30px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 38%, #BFE9FF 68%, #45EDD1 100%);box-shadow:0 24px 60px rgba(15,23,42,0.10)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:40px;border-radius:28px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.66));backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de cara sonriente" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M17 28c4 5 10 5 14 0"/><path d="M18 19v2"/><path d="M30 19v2"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Cercanía</h3>
+<p style="font-size:26px;line-height:1.45;color:#56616A">Sus ojos animados lo hacen simpático.</p>
+</div>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;padding:2px;border-radius:30px;background:linear-gradient(135deg, #45EDD1 0%, #FFFFFF 38%, #BFE9FF 68%, #45EDD1 100%);box-shadow:0 24px 60px rgba(15,23,42,0.10)">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:40px;border-radius:28px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.66));backdrop-filter:blur(14px)">
+<div style="width:88px;height:88px;border-radius:24px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de destello" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5v10"/><path d="M24 33v10"/><path d="M5 24h10"/><path d="M33 24h10"/><path d="M24 15l3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#111518">Innovación</h3>
+<p style="font-size:26px;line-height:1.45;color:#56616A">Tecnología moderna a tu alcance.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">12 / 20</p></div>
+<aside>[BRANDING · Sentimientos · aprox. 60 s]
+Queremos que nuestro cliente sienta cuatro cosas.
+Confianza: Jeeves cumple, llega a tiempo y se detiene si algo se cruza.
+Tranquilidad: el equipo deja de correr de un lado a otro y se enfoca en atender.
+Cercanía: no es una máquina fría; sus ojos animados lo hacen simpático y fácil de aceptar.
+E innovación: el cliente siente que su negocio tiene tecnología moderna, a un precio accesible.
+Lo logramos con el diseño del robot, su personalidad y, como verán en la siguiente diapositiva, los colores y la tipografía.</aside>
+</section>
+
+<section id="identidad" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:56px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;69,237,209&#x27;,LA=0.05,PA=0.8,N=16,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">Branding · Colores y tipografía</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#F2F5F4">Cada color dice algo.</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding:20px;border-radius:30px;background:linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.26), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="height:160px;border-radius:24px;background:#45EDD1;border:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;justify-content:end;padding:20px"><p style="font-size:24px;font-weight:600;color:#0E1114">#45EDD1</p></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;color:#F2F5F4">Turquesa</h3>
+<p style="font-size:24px;line-height:1.4;color:#A3AEB1">Acción y tecnología.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding:20px;border-radius:30px;background:linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.26), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="height:160px;border-radius:24px;background:#0F172A;border:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;justify-content:end;padding:20px"><p style="font-size:24px;font-weight:600;color:#F2F5F4">#0F172A</p></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;color:#F2F5F4">Azul marino</h3>
+<p style="font-size:24px;line-height:1.4;color:#A3AEB1">Seriedad y confianza.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding:20px;border-radius:30px;background:linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.26), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="height:160px;border-radius:24px;background:#2563EB;border:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;justify-content:end;padding:20px"><p style="font-size:24px;font-weight:600;color:#F2F5F4">#2563EB</p></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;color:#F2F5F4">Azul</h3>
+<p style="font-size:24px;line-height:1.4;color:#A3AEB1">Los ojos de Jeeves: cercanía.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding:20px;border-radius:30px;background:linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.26), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="height:160px;border-radius:24px;background:#EEEDEC;border:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;justify-content:end;padding:20px"><p style="font-size:24px;font-weight:600;color:#0E1114">#EEEDEC</p></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;color:#F2F5F4">Porcelana</h3>
+<p style="font-size:24px;line-height:1.4;color:#A3AEB1">Limpieza y orden.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding:20px;border-radius:30px;background:linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.26), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="height:160px;border-radius:24px;background:#1E5A3D;border:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;justify-content:end;padding:20px"><p style="font-size:24px;font-weight:600;color:#F2F5F4">#1E5A3D</p></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;color:#F2F5F4">Verde charola</h3>
+<p style="font-size:24px;line-height:1.4;color:#A3AEB1">Servicio y calma.</p>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:96px;padding:28px 40px;border-radius:30px;background:linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.26), 0 30px 60px rgba(0,0,0,0.35);backdrop-filter:blur(14px)">
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:28px"><p style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:700;letter-spacing:-2px;color:#F2F5F4">Aa</p><p style="font-size:24px;line-height:1.4;color:#A3AEB1"><b style="color:#F2F5F4">Inter Tight</b><br>Títulos: firme y moderna</p></div>
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:28px"><p style="font-family:Inter, Arial, sans-serif;font-size:72px;font-weight:400;color:#F2F5F4">Aa</p><p style="font-size:24px;line-height:1.4;color:#A3AEB1"><b style="color:#F2F5F4">Inter</b><br>Textos: clara y fácil de leer</p></div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#7D898E">Jeeves Robotics</p><p style="font-size:24px;color:#7D898E;font-variant-numeric:tabular-nums">13 / 20</p></div>
+<aside>[BRANDING · Colores y tipografía · aprox. 50 s]
+Nuestros colores tienen intención. El turquesa es el color de acción: botones y detalles tecnológicos. El azul marino transmite seriedad y confianza. El azul es el color de los ojos de Jeeves y da cercanía. La porcelana, un blanco cálido, transmite limpieza y orden. Y el verde de las charolas aporta calma y la idea de servicio.
+En tipografía usamos Inter Tight para los títulos, que se ve firme y moderna, e Inter para los textos, porque es muy clara y fácil de leer en pantalla.
+[Verifiquen que estos colores coincidan con su documento de branding.]</aside>
+</section>
+
+<section id="comercial" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px 128px 128px;display:flex;flex-direction:column;justify-content:space-between;gap:40px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;69,237,209&#x27;,LA=0.05,PA=0.8,N=16,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:end">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">Difusión · Comercial</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#F2F5F4">El comercial.</h2>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px"><svg aria-label="Ícono de video" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#A3AEB1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="38" height="28" rx="4"/><path d="M20 18v12l10-6z"/></svg><p style="font-size:24px;color:#A3AEB1">1 min 23 s · con sonido</p></div>
+</div>
+<video class="vid snd" poster="media/reel.jpg" src="media/reel.mp4" muted loop playsinline preload="auto" aria-label="Comercial animado de Jeeves Robotics" style="align-self:center;width:1152px;height:648px;object-fit:cover;border-radius:28px;border:1px solid #262D32;box-shadow:0 40px 90px rgba(0,0,0,0.5)"></video>
+<aside>[DIFUSIÓN · Comercial · aprox. 1 min 40 s · El video arranca solo al llegar a esta diapositiva]
+Para dar a conocer a Jeeves hicimos un comercial animado. Véanlo.
+[Reproducir el video completo.]
+En el comercial se ve cómo aparece Jeeves, sus ojos, su recorrido en el restaurante, sus datos clave: 1.20 metros, 3 destinos y 6,999 pesos, y el cierre con la marca.</aside>
+</section>
+
+<section id="cartel" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:row;gap:96px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;10,125,108&#x27;,LA=0.06,PA=0.5,N=14,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">Difusión · Cartel</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">El cartel.</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:28px"><div style="width:80px;height:80px;border-radius:22px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de cartel" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="5" width="26" height="38" rx="3"/><path d="M17 14h14"/><path d="M17 20h14"/><circle cx="24" cy="31" r="5"/></svg></div><p style="font-size:32px;color:#111518">Impreso en [tamaño]</p></div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:28px"><div style="width:80px;height:80px;border-radius:22px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de ubicación" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 43s-13-12-13-22a13 13 0 0 1 26 0c0 10-13 22-13 22z"/><circle cx="24" cy="21" r="5"/></svg></div><p style="font-size:32px;color:#111518">Se coloca en [lugares]</p></div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:28px"><div style="width:80px;height:80px;border-radius:22px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de QR" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="13" height="13" rx="2"/><rect x="28" y="7" width="13" height="13" rx="2"/><rect x="7" y="28" width="13" height="13" rx="2"/><path d="M28 28h5v5h-5z"/><path d="M38 28h3"/><path d="M28 39h3"/><path d="M36 36h5v5"/></svg></div><p style="font-size:32px;color:#111518">Con QR a nuestra página</p></div>
+</div>
+</div>
+<div style="width:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:linear-gradient(150deg, rgba(255,255,255,0.8), rgba(225,240,237,0.6));border:2px dashed #9FC9C1;backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(15,23,42,0.10);border-radius:28px">
+<svg aria-label="Ícono de cartel" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#6B767E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="5" width="26" height="38" rx="3"/><path d="M17 14h14"/><path d="M17 20h14"/><circle cx="24" cy="31" r="5"/></svg>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#56616A">Imagen del cartel</p>
+<p style="font-size:24px;color:#6B767E">Formato vertical</p>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">15 / 20</p></div>
+<aside>[DIFUSIÓN · Cartel · aprox. 40 s · Si lo llevan impreso, muéstrenlo físicamente]
+También diseñamos un cartel para difundir a Jeeves.
+[Expliquen el tamaño, dónde lo colocarían y qué información trae: el robot, el lema, el precio y el QR a la página.]</aside>
+</section>
+
+<section id="pagina" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:row;gap:80px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;69,237,209&#x27;,LA=0.05,PA=0.8,N=16,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="width:560px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">Difusión · Página digital</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#F2F5F4">Jeeves en la web.</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:20px"><div style="width:10px;height:10px;border-radius:50%;background:#45EDD1"></div><p style="font-size:32px;color:#F2F5F4">Catálogo y precios</p></div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:20px"><div style="width:10px;height:10px;border-radius:50%;background:#45EDD1"></div><p style="font-size:32px;color:#F2F5F4">App y modelo 3D</p></div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:20px"><div style="width:10px;height:10px;border-radius:50%;background:#45EDD1"></div><p style="font-size:32px;color:#F2F5F4">Cotiza por WhatsApp</p></div>
+</div>
+<p style="font-size:24px;color:#A3AEB1">regal-melba-2c1e42.netlify.app</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #2A3237;background:#161B1F;box-shadow:0 40px 90px rgba(0,0,0,0.5)">
+<div style="height:52px;display:flex;flex-direction:row;align-items:center;gap:12px;padding:0 24px;background:#1B2126"><div style="width:14px;height:14px;border-radius:50%;background:#3A444A"></div><div style="width:14px;height:14px;border-radius:50%;background:#3A444A"></div><div style="width:14px;height:14px;border-radius:50%;background:#3A444A"></div></div>
+<img src="media/site.jpg" alt="Captura de la página de Jeeves Robotics: Entregas que se mueven solas, desde 6,999 pesos" style="width:100%;flex:1;object-fit:cover">
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#7D898E">Jeeves Robotics</p><p style="font-size:24px;color:#7D898E;font-variant-numeric:tabular-nums">16 / 20</p></div>
+<aside>[DIFUSIÓN · Página digital (2do parcial) · aprox. 50 s]
+Nuestra página digital es el centro de la difusión. Ahí está el catálogo con precios, el modelo 3D de Jeeves, la app de demostración, cómo comprar y un botón para cotizar directo por WhatsApp.
+Todas nuestras redes y el cartel llevan a esta página.</aside>
+</section>
+
+<section id="redes" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:row;align-items:end;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;10,125,108&#x27;,LA=0.06,PA=0.5,N=14,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">Difusión · Redes sociales</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">Síguenos.</h2>
+</div>
+<p style="font-size:32px;line-height:1.45;color:#3B4457;width:560px">Publicamos videos de Jeeves en acción, pruebas del prototipo y promociones.</p>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:28px">
+<div style="width:300px;height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(150deg, rgba(255,255,255,0.8), rgba(225,240,237,0.6));border:2px dashed #9FC9C1;backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(15,23,42,0.10);border-radius:48px">
+<svg aria-label="Ícono de Instagram" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#6B767E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="32" height="32" rx="9"/><circle cx="24" cy="24" r="7"/><circle cx="33" cy="15" r="1.5"/></svg>
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#56616A">Captura</p>
+<p style="font-size:24px;color:#6B767E">Instagram</p>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px"><div style="width:64px;height:64px;border-radius:18px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de Instagram" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="32" height="32" rx="9"/><circle cx="24" cy="24" r="7"/><circle cx="33" cy="15" r="1.5"/></svg></div><div style="display:flex;flex-direction:column"><p style="font-size:24px;color:#56616A">Instagram</p><p style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;color:#111518">jeevesrobotics</p></div></div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:28px">
+<div style="width:300px;height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(150deg, rgba(255,255,255,0.8), rgba(225,240,237,0.6));border:2px dashed #9FC9C1;backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(15,23,42,0.10);border-radius:48px">
+<svg aria-label="Ícono de TikTok" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#6B767E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 34V8l16-3v6l-16 3"/><circle cx="14" cy="34" r="6"/></svg>
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#56616A">Captura</p>
+<p style="font-size:24px;color:#6B767E">TikTok</p>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px"><div style="width:64px;height:64px;border-radius:18px;background:#111518;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de TikTok" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 34V8l16-3v6l-16 3"/><circle cx="14" cy="34" r="6"/></svg></div><div style="display:flex;flex-direction:column"><p style="font-size:24px;color:#56616A">TikTok</p><p style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;color:#111518">jeevesrobotics</p></div></div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">17 / 20</p></div>
+<aside>[DIFUSIÓN · Redes sociales · aprox. 40 s]
+También estamos en redes sociales: en Instagram y en TikTok nos encuentran como jeevesrobotics.
+Ahí publicamos videos de Jeeves en acción, avances del prototipo y promociones.
+[Ajusten el texto de qué publican si es distinto.]</aside>
+</section>
+
+<section id="dinamica" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;69,237,209&#x27;,LA=0.04,PA=0.6,N=12,PER=2;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">Dinámica con el público</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#F2F5F4">Acércate a Jeeves.</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px;padding:40px;border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.22)">
+<div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg, rgba(69,237,209,0.22), rgba(69,237,209,0.04));border:1px solid rgba(69,237,209,0.35);display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de mano" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 26V12a3 3 0 0 1 6 0v10"/><path d="M22 20v-3a3 3 0 0 1 6 0v5"/><path d="M28 21a3 3 0 0 1 6 0v3"/><path d="M34 23a3 3 0 0 1 6 0v6c0 8-6 14-14 14h-2c-5 0-8-2-11-6l-5-7a3 3 0 0 1 5-4l3 3"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#F2F5F4">Tócalo</h3>
+<p style="font-size:26px;line-height:1.45;color:#C9D2D4">Prueba el prototipo: síguelo por la línea y ponle un obstáculo.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:28px;padding:40px;border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.22)">
+<div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg, rgba(69,237,209,0.22), rgba(69,237,209,0.04));border:1px solid rgba(69,237,209,0.35);display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de control" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="14" width="38" height="22" rx="11"/><path d="M15 21v8"/><path d="M11 25h8"/><circle cx="31" cy="23" r="1.5"/><circle cx="35" cy="27" r="1.5"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#F2F5F4">Juega</h3>
+<p style="font-size:26px;line-height:1.45;color:#C9D2D4">Jeeves Express: entrega los pedidos antes que nadie.</p>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:20px"><div style="padding:14px;background:#F2F5F4;border-radius:16px"><svg aria-label="Código QR para jugar Jeeves Express" width="160" height="160" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path stroke="#0E1114" d="M0 0.5h7m3 0h1m2 0h1m2 0h2m1 0h2m2 0h1m2 0h7M0 1.5h1m5 0h1m2 0h2m2 0h5m2 0h1m1 0h1m3 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h3m1 0h2m2 0h3m7 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m2 0h6m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h3m2 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h4m1 0h1m1 0h2m3 0h2m4 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h2m1 0h2m2 0h1m2 0h1m2 0h3M0 8.5h1m1 0h5m2 0h1m1 0h5m1 0h1m5 0h2m1 0h5M2 9.5h1m1 0h2m1 0h1m2 0h3m5 0h4m1 0h1m2 0h2m1 0h2m1 0h1M0 10.5h1m1 0h6m1 0h1m1 0h1m3 0h2m1 0h1m1 0h2m2 0h1m3 0h1m1 0h2M0 11.5h1m3 0h2m3 0h2m1 0h1m1 0h1m1 0h1m2 0h4m5 0h3m1 0h1M1 12.5h1m4 0h1m1 0h3m7 0h1m2 0h1m1 0h3m2 0h2m1 0h1M0 13.5h2m3 0h1m1 0h1m2 0h1m1 0h6m2 0h1m1 0h5m2 0h4M1 14.5h1m2 0h1m1 0h2m1 0h2m7 0h2m1 0h2m2 0h3m1 0h3M4 15.5h2m1 0h1m1 0h1m1 0h3m2 0h1m1 0h13M1 16.5h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m3 0h1m1 0h1m2 0h1m1 0h1m2 0h3m2 0h1M2 17.5h1m4 0h1m1 0h2m1 0h3m1 0h2m1 0h2m1 0h2m1 0h3m1 0h4M1 18.5h1m4 0h1m2 0h1m1 0h7m4 0h1m1 0h1m2 0h2m1 0h2M2 19.5h1m2 0h1m2 0h1m1 0h3m1 0h2m1 0h4m3 0h1m1 0h6M0 20.5h1m1 0h5m1 0h1m2 0h1m1 0h1m2 0h1m2 0h4m2 0h1m2 0h2m1 0h1M0 21.5h1m3 0h2m4 0h1m2 0h3m2 0h1m2 0h1m1 0h1m2 0h1m3 0h1m1 0h1M0 22.5h1m5 0h3m1 0h1m4 0h2m3 0h1m4 0h1m3 0h1m1 0h1M0 23.5h1m1 0h4m1 0h2m3 0h1m2 0h1m5 0h1m1 0h2m1 0h1m3 0h1M0 24.5h1m1 0h1m2 0h5m1 0h3m1 0h1m1 0h1m4 0h1m1 0h5m2 0h2M8 25.5h1m4 0h1m2 0h1m1 0h2m1 0h1m1 0h2m3 0h1m1 0h1m1 0h1M0 26.5h7m2 0h1m3 0h1m1 0h1m2 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h2M0 27.5h1m5 0h1m1 0h2m4 0h1m1 0h1m2 0h1m1 0h4m3 0h4M0 28.5h1m1 0h3m1 0h1m1 0h1m2 0h3m4 0h1m2 0h1m2 0h6m1 0h1M0 29.5h1m1 0h3m1 0h1m1 0h1m1 0h1m4 0h2m3 0h4m4 0h2m2 0h1M0 30.5h1m1 0h3m1 0h1m1 0h6m3 0h3m2 0h6m1 0h2M0 31.5h1m5 0h1m3 0h1m3 0h1m1 0h1m1 0h6m1 0h1m2 0h3M0 32.5h7m1 0h1m1 0h3m4 0h3m2 0h4m1 0h1m3 0h1"/></svg>
+</div><p style="font-size:24px;line-height:1.4;color:#A3AEB1">Escanea<br>y juega</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:28px;padding:40px;border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.22)">
+<div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg, rgba(69,237,209,0.22), rgba(69,237,209,0.04));border:1px solid rgba(69,237,209,0.35);display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de regalo" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="18" width="34" height="9" rx="2"/><path d="M10 27v14h28V27"/><path d="M24 18v23"/><path d="M24 18c-3-7-12-8-12-3s9 3 12 3c3 0 12 2 12-3s-9-4-12 3z"/></svg></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#F2F5F4">Llévate algo</h3>
+<p style="font-size:26px;line-height:1.45;color:#C9D2D4">El mejor puntaje gana [detalle].</p>
+</div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#7D898E">Jeeves Robotics</p><p style="font-size:24px;color:#7D898E;font-variant-numeric:tabular-nums">18 / 20</p></div>
+<aside>[DINÁMICA · aprox. 2-3 min]
+Ahora queremos que conozcan a Jeeves de cerca.
+Tócalo: pasen a ver el prototipo. Es un kit 2WD seguidor de línea con Arduino Uno, driver L298, dos sensores TCRT5000 y una pantalla de 3.5 pulgadas con ESP32 para los ojos. Pónganle la mano enfrente y vean cómo reacciona.
+Juega: escaneen el QR y jueguen Jeeves Express, nuestro juego donde cruzas la ciudad y entregas los pedidos en las mesas.
+Y llévate algo: quien haga el mejor puntaje se lleva [detalle, por ejemplo un llavero o sticker de Jeeves].</aside>
+</section>
+
+<section id="equipo" data-transition="fade" style="background:#F5F7F6;color:#111518;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;10,125,108&#x27;,LA=0.06,PA=0.5,N=14,PER=3;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#0A7D6C">Equipo</p>
+<h2 style="font-family:'Inter Tight', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;letter-spacing:-2px;color:#111518">Cuatro personas, un robot.</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:32px;border-radius:28px;padding:48px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.62));border:1px solid rgba(255,255,255,0.95);box-shadow:inset 0 1px 0 #FFFFFF, 0 24px 60px rgba(15,23,42,0.10);backdrop-filter:blur(14px)">
+<div style="width:200px;height:200px;border-radius:50%;background:#ECF0EF;border:2px dashed #AEB8BD;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#56616A">Foto</p></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#111518;text-align:center">[Nombre 1]</h3>
+<p style="font-size:24px;color:#56616A;text-align:center">[Rol]</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:32px;border-radius:28px;padding:48px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.62));border:1px solid rgba(255,255,255,0.95);box-shadow:inset 0 1px 0 #FFFFFF, 0 24px 60px rgba(15,23,42,0.10);backdrop-filter:blur(14px)">
+<div style="width:200px;height:200px;border-radius:50%;background:#ECF0EF;border:2px dashed #AEB8BD;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#56616A">Foto</p></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#111518;text-align:center">[Nombre 2]</h3>
+<p style="font-size:24px;color:#56616A;text-align:center">[Rol]</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:32px;border-radius:28px;padding:48px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.62));border:1px solid rgba(255,255,255,0.95);box-shadow:inset 0 1px 0 #FFFFFF, 0 24px 60px rgba(15,23,42,0.10);backdrop-filter:blur(14px)">
+<div style="width:200px;height:200px;border-radius:50%;background:#ECF0EF;border:2px dashed #AEB8BD;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#56616A">Foto</p></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#111518;text-align:center">[Nombre 3]</h3>
+<p style="font-size:24px;color:#56616A;text-align:center">[Rol]</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:32px;border-radius:28px;padding:48px;background:linear-gradient(150deg, rgba(255,255,255,0.86), rgba(236,246,244,0.62));border:1px solid rgba(255,255,255,0.95);box-shadow:inset 0 1px 0 #FFFFFF, 0 24px 60px rgba(15,23,42,0.10);backdrop-filter:blur(14px)">
+<div style="width:200px;height:200px;border-radius:50%;background:#ECF0EF;border:2px dashed #AEB8BD;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#56616A">Foto</p></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+<h3 style="font-family:'Inter Tight', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.25;color:#111518;text-align:center">[Nombre 4]</h3>
+<p style="font-size:24px;color:#56616A;text-align:center">[Rol]</p>
+</div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:34px;display:flex;flex-direction:row;justify-content:space-between;align-items:center"><p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#6B767E">Jeeves Robotics</p><p style="font-size:24px;color:#6B767E;font-variant-numeric:tabular-nums">19 / 20</p></div>
+<aside>[aprox. 30 s · Cada integrante puede presentarse en una frase]
+Detrás de Jeeves somos cuatro personas:
+[Nombre 1], que se encargó de [rol].
+[Nombre 2], que se encargó de [rol].
+[Nombre 3], que se encargó de [rol].
+Y [Nombre 4], que se encargó de [rol].</aside>
+</section>
+
+<section id="cierre" data-transition="fade" style="background:#0E1114;color:#F2F5F4;font-family:Inter, Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between;gap:72px">
+<iframe class="emb" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{display:block;width:100%;height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;&lt;script&gt;
+(function(){var c=document.getElementById(&#x27;c&#x27;),x=c.getContext(&#x27;2d&#x27;),W=1,H=1,D=1;
+var COL=&#x27;69,237,209&#x27;,LA=0.04,PA=0.6,N=12,PER=2;
+function rs(){D=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth||innerWidth;H=c.clientHeight||innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}
+rs();addEventListener(&#x27;resize&#x27;,rs);
+function r(a,b){return a+Math.random()*(b-a)}
+var L=[];for(var i=0;i&lt;N;i++){var l={b:(i+.5)/N+r(-.015,.015),a:r(.008,.03),f:r(.5,1.4),p:r(0,6.3),d:i%2?1:-1,s:r(.7,1.3),ps:[]};
+for(var k=0;k&lt;PER;k++)l.ps.push({u:Math.random(),v:r(.025,.07),len:r(.04,.12),w:r(1.2,2.6)});L.push(l)}
+function Y(l,u,t){return (l.b+l.a*Math.sin(u*l.f*6.283+l.p+t*.25*l.s))*H}
+var t0=performance.now();
+function fr(now){var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+for(var i=0;i&lt;N;i++){var l=L[i];x.beginPath();for(var s=0;s&lt;=60;s++){var u=s/60;var X=u*W,YY=Y(l,u,t);s?x.lineTo(X,YY):x.moveTo(X,YY)}
+x.strokeStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+LA+&#x27;)&#x27;;x.lineWidth=1;x.stroke();
+for(var k=0;k&lt;l.ps.length;k++){var q=l.ps[k];q.u+=q.v*l.d/60;if(q.u&gt;1.15)q.u=-.15;if(q.u&lt;-.15)q.u=1.15;
+var hu=q.u,tu=q.u-q.len*l.d,hx=hu*W,hy=Y(l,hu,t),tx=tu*W,ty=Y(l,tu,t);
+var g=x.createLinearGradient(tx,ty,hx,hy);g.addColorStop(0,&#x27;rgba(&#x27;+COL+&#x27;,0)&#x27;);g.addColorStop(1,&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;);
+x.beginPath();for(var s2=0;s2&lt;=12;s2++){var uu=tu+(hu-tu)*s2/12;var xx=uu*W,yy=Y(l,uu,t);s2?x.lineTo(xx,yy):x.moveTo(xx,yy)}
+x.strokeStyle=g;x.lineWidth=q.w;x.lineCap=&#x27;round&#x27;;x.stroke();
+x.beginPath();x.arc(hx,hy,q.w*1.4,0,6.283);x.fillStyle=&#x27;rgba(&#x27;+COL+&#x27;,&#x27;+PA+&#x27;)&#x27;;x.shadowColor=&#x27;rgba(&#x27;+COL+&#x27;,1)&#x27;;x.shadowBlur=14;x.fill();x.shadowBlur=0}}
+requestAnimationFrame(fr)}
+requestAnimationFrame(fr)})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<div style="position:absolute;left:1392px;top:128px;width:400px;display:flex;flex-direction:column;align-items:center;gap:20px;padding:36px;background:#F2F5F4;border-radius:32px;box-shadow:0 0 80px rgba(69,237,209,0.25)">
+<svg aria-label="Código QR a la página de Jeeves Robotics con redes sociales y tarjeta de presentación" width="300" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges"><path stroke="#0E1114" d="M0 0.5h7m3 0h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h7M0 1.5h1m5 0h1m2 0h2m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h2m2 0h1m2 0h1m3 0h1m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m4 0h3m1 0h1m4 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m2 0h2m2 0h1m6 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h3m1 0h1m3 0h1m2 0h1M0 8.5h1m1 0h5m3 0h2m1 0h1m3 0h2m1 0h1m1 0h5M1 9.5h3m3 0h1m1 0h3m1 0h1m5 0h1m1 0h4m3 0h1M0 10.5h2m2 0h3m3 0h2m1 0h4m3 0h1m1 0h3M0 11.5h4m3 0h1m1 0h2m1 0h1m1 0h2m2 0h1m1 0h2m2 0h2m1 0h1M1 12.5h4m1 0h1m3 0h1m5 0h4m1 0h1m3 0h2M5 13.5h1m2 0h3m2 0h1m2 0h1m2 0h1m1 0h4m3 0h1M1 14.5h2m3 0h3m1 0h1m2 0h3m1 0h2m1 0h1m1 0h2m1 0h2M1 15.5h4m6 0h3m2 0h1m1 0h1m4 0h2m2 0h1M0 16.5h3m2 0h2m1 0h1m5 0h2m1 0h2m6 0h2M0 17.5h1m1 0h2m4 0h2m6 0h9m1 0h1m1 0h1M0 18.5h1m1 0h5m1 0h2m1 0h1m3 0h3m4 0h3m1 0h1M0 19.5h1m2 0h1m3 0h1m1 0h1m4 0h2m2 0h2m3 0h2m2 0h1M0 20.5h1m1 0h3m1 0h1m2 0h1m2 0h1m4 0h1m2 0h5m1 0h3M8 21.5h4m1 0h2m1 0h3m1 0h1m3 0h5M0 22.5h7m2 0h2m1 0h4m1 0h1m1 0h2m1 0h1m1 0h3M0 23.5h1m5 0h1m1 0h1m4 0h1m1 0h2m1 0h3m3 0h1m3 0h1M0 24.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m2 0h1m2 0h5m1 0h1M0 25.5h1m1 0h3m1 0h1m1 0h2m1 0h1m4 0h1m1 0h1m6 0h4M0 26.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h2m3 0h9M0 27.5h1m5 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m4 0h1m1 0h1M0 28.5h7m1 0h4m1 0h1m1 0h3m1 0h1m4 0h3"/></svg>
+
+<p style="font-size:24px;line-height:1.35;font-weight:600;color:#0E1114;text-align:center">Redes y tarjeta de presentación</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#45EDD1">Gracias</p>
+<h1 style="font-family:'Inter Tight', Arial, sans-serif;font-size:120px;font-weight:600;line-height:1.05;letter-spacing:-3px;color:#F2F5F4">Tu destino.<br>Nuestra misión.</h1>
+</div>
+<div style="display:flex;flex-direction:row;gap:48px;padding:48px 0 0;border-top:1px solid #262D32">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="width:72px;height:72px;border-radius:20px;background:#161B1F;border:1px solid #2A3237;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de WhatsApp" width="40" height="40" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40l3-9a16 16 0 1 1 6 6z"/><path d="M18 18c0 6 6 12 12 12l2-3-4-2-2 2c-2-1-4-3-5-5l2-2-2-4z"/></svg></div>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#A3AEB1">WhatsApp</p>
+<p style="font-size:32px;color:#F2F5F4">+52 56 3642 2489</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="width:72px;height:72px;border-radius:20px;background:#161B1F;border:1px solid #2A3237;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de correo" width="40" height="40" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="36" height="26" rx="4"/><path d="M7 13l17 13 17-13"/></svg></div>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#A3AEB1">Correo</p>
+<p style="font-size:32px;color:#F2F5F4">jeevesroboticts@gmail.com</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="width:72px;height:72px;border-radius:20px;background:#161B1F;border:1px solid #2A3237;display:flex;align-items:center;justify-content:center"><svg aria-label="Ícono de redes" width="40" height="40" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#45EDD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="32" height="32" rx="9"/><circle cx="24" cy="24" r="7"/><circle cx="33" cy="15" r="1.5"/></svg></div>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#A3AEB1">Instagram y TikTok</p>
+<p style="font-size:32px;color:#F2F5F4">@jeevesrobotics</p>
+</div>
+</div>
+<aside>[CIERRE · Hablan todos o Integrante 1 · aprox. 40 s + preguntas]
+Gracias por su atención.
+En este código QR encuentran nuestra página con nuestras redes sociales y nuestra tarjeta de presentación. Escanéenlo.
+También pueden escribirnos por WhatsApp al +52 56 3642 2489 o al correo jeevesroboticts@gmail.com, de lunes a viernes de 9:00 a 18:00, y seguirnos en Instagram y TikTok como jeevesrobotics.
+Jeeves Robotics: tu destino, nuestra misión. ¿Tienen alguna pregunta?</aside>
+</section>
+
+</div></div>
+<div id="notes" role="region" aria-label="Notas del orador"></div>
+<nav id="ui" aria-label="Controles de la presentación">
+<button id="prev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+<span id="n">1 / 20</span>
+<button id="next" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+<button id="snd" aria-label="Activar sonido" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path id="w" d="M16 9l5 6M21 9l-5 6"/></svg></button>
+<button id="nt" aria-label="Notas del orador" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></button>
+<button id="fs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<script>
+(function(){
+var S=[].slice.call(document.querySelectorAll('#stage>section')),st=document.getElementById('stage'),i=0,sound=false;
+function fit(){var k=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='translate(-50%,-50%) scale('+k+')'}
+addEventListener('resize',fit);fit();
+function enter(s){s.querySelectorAll('iframe.emb').forEach(function(f){if(!f.srcdoc)f.srcdoc=f.getAttribute('data-src')});
+ s.querySelectorAll('video').forEach(function(v){try{v.currentTime=0}catch(e){}v.muted=!(sound&&v.classList.contains('snd'));var p=v.play();if(p&&p.catch)p.catch(function(){v.muted=true;v.play().catch(function(){})})})}
+function leave(s){s.querySelectorAll('iframe.emb').forEach(function(f){f.removeAttribute('srcdoc')});s.querySelectorAll('video').forEach(function(v){v.pause()})}
+function go(n,first){n=Math.max(0,Math.min(S.length-1,n));if(n===i&&!first)return;if(!first){leave(S[i]);S[i].classList.remove('on')}i=n;S[i].classList.add('on');enter(S[i]);
+ document.getElementById('n').textContent=(i+1)+' / '+S.length;document.getElementById('bar').style.width=((i+1)/S.length*100)+'%';
+ var a=S[i].querySelector('aside');document.getElementById('notes').textContent=a?a.textContent:'';
+ if(history.replaceState)history.replaceState(null,'','#'+(i+1))}
+var h=parseInt(location.hash.slice(1),10);go(h>0?h-1:0,true);
+function next(){go(i+1)}function prev(){go(i-1)}
+document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;
+document.getElementById('nt').onclick=function(){var on=document.body.classList.toggle('shownotes');this.setAttribute('aria-pressed',on)};
+document.getElementById('fs').onclick=function(){var d=document.documentElement;if(!document.fullscreenElement){(d.requestFullscreen||d.webkitRequestFullscreen||function(){}).call(d)}else{document.exitFullscreen()}};
+function setSound(v){sound=v;var b=document.getElementById('snd');b.setAttribute('aria-pressed',v);b.setAttribute('aria-label',v?'Silenciar':'Activar sonido');document.getElementById('w').setAttribute('d',v?'M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11':'M16 9l5 6M21 9l-5 6');S[i].querySelectorAll('video.snd').forEach(function(x){x.muted=!v;if(v)x.play().catch(function(){})})}
+document.getElementById('snd').onclick=function(){setSound(!sound)};
+addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();next()}else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();prev()}else if(k==='Home')go(0);else if(k==='End')go(S.length-1);else if(k==='f'||k==='F')document.getElementById('fs').click();else if(k==='n'||k==='N')document.getElementById('nt').click();else if(k==='s'||k==='S')setSound(!sound)});
+var x0=null;addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){dx<0?next():prev()}x0=null});
+document.getElementById('vp').addEventListener('click',function(e){if(e.clientX>innerWidth*0.5)next();else prev()});
+var t;function wake(){document.body.classList.remove('idle');clearTimeout(t);t=setTimeout(function(){document.body.classList.add('idle')},2500)}addEventListener('mousemove',wake);addEventListener('touchstart',wake,{passive:true});wake();
+})();
+</script></body></html>
